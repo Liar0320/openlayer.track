@@ -1,8 +1,15 @@
+/*
+ * @Author: lich
+ * @Date: 2020-01-17 22:49:05
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2020-01-17 22:55:16
+ * 利用arc创建lineString要素
+ */
 /* eslint-disable import/prefer-default-export */
 // @ts-ignore
 import { LineString } from 'ol/geom';
 import { Feature } from 'ol';
-import featuresSourceUrl from './asstes/filter.topojson';
+import featuresSourceUrl from './asstes/route.topojson';
 
 /**
  * 根据起始点，结束点 创建LineString 线段
@@ -44,13 +51,6 @@ function createFeature(coordinate) {
     features.push(feature);
   }
 
-  //    else {
-  //     const feature = createFeature(arcLine.geometries[0].coords);
-  //     const nextFeature = createFeature(arcLine.geometries[1].coords);
-
-  //     nextFeature.set('prevFeature', feature);
-  //     nextFeature.set('stop', true);
-  //   }
   return features;
 }
 

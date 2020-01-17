@@ -1,16 +1,15 @@
-# Download novel from net
+# Route Map
 
 ## Show
-![安装](images/install01.png)
-![安装](images/doc01.png)
+![演示示例](images/example.gif)
 
 ## Depedency
-- [cherrio](https://cheerio.js.org/)  Fast, flexible & lean implementation of core jQuery designed specifically for the server.
-- [inquirer](https://github.com/SBoudrias/Inquirer.js)  A collection of common interactive command line user interfaces.
+- [openlayer](https://github.com/openlayers/openlayers)  OpenLayers is a high-performance, feature-packed library for creating interactive maps on the web. It can display map tiles, vector data and markers loaded from any source on any web page. OpenLayers has been developed to further the use of geographic information of all kinds. It is completely free, Open Source JavaScript, released under the BSD 2-Clause License.
+- [arc](http://springmeyer.github.io/arc.js/) Calculate great circles routes as lines in GeoJSON or WKT format. 
 ## Install
 Clone the repo using Git:
 ```
-git clone https://github.com/Liar0320/spider.git
+git clone https://github.com/Liar0320/openlayer.track.git
 ```
 
 Alternatively you can download this repository and then:
@@ -21,22 +20,31 @@ npm run start
 ```
 
 ## Configuration options
-#### timeout 
-Timeout for each request. 
 
-default value: 15000
+1. 路径坐标文件 /asstes/route.topojson
+    ```
+    示例
+    {
+        "flights":[
+            [
+                [
+                    "30.8312277712",
+                    "120.9259679951"
+                ],
+                [
+                    "43.7933993081",
+                    "87.6270586992"
+                ]
+            ]
+        ]
+     }
+    ```
 
-#### maxThreadExist
-The maximum number of threads that exist at one time, that is, the number of asynchronous downloads that are started at the same time.
+2. 从起始点到终点的时间间隔 /src/util.ol.js -> pointsPerMs
+    ```
+    /** 从起始点到终点的时间间隔 */
+    const pointsPerMs = 2000;
+    ```
 
-default value: 20
-
-#### rePullCount
-The number of times the request was re initiated if there was a request failure.
-
-default value: 4
-
-#### downloadDirector
-Root of download directory
-
-default value: join(__dirname, './download') 
+## TODO 
+>>待整理

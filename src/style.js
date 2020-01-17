@@ -1,3 +1,10 @@
+/*
+ * @Author: lich
+ * @Date: 2020-01-17 22:48:30
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2020-01-17 22:48:53
+ * 样式表
+ */
 import { Style, Stroke, Fill, RegularShape, Icon } from 'ol/style';
 import CircleStyle from 'ol/style/Circle';
 import { createStyleIconImage } from './util.ol';
@@ -5,7 +12,6 @@ import { planSvg } from './asstes/svg';
 
 export const arcStyle = new Style({
   stroke: new Stroke({
-    // color: [0, 122, 122, 0.7],
     color: '#FF0000',
     width: 2,
   }),
@@ -43,9 +49,6 @@ export const createPlanStyle = (rotation = 0) => {
       img: createStyleIconImage(planSvg),
       imgSize: [30, 30],
       rotation: -1 * rotation + (Math.PI * 1) / 2,
-      // color: '#FF0000',
-      // crossOrigin: 'anonymous',
-      // src: plane,
     }),
   });
 };

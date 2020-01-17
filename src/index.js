@@ -16,7 +16,14 @@ window.map = new Map({
   target: 'map',
   view: new View({
     center: fromLonLat(collectionLonLat.hangzhou),
-    zoom: 8,
+    zoom: 1,
+    /** 限制当前屏幕内的范围  view.calculateExtent() */
+    extent: [
+      -6665811.10870122,
+      -7201514.726165477,
+      33409205.576877266,
+      14249780.67741473,
+    ],
   }),
   layers: [
     new TileLayer({

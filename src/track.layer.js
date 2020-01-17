@@ -1,3 +1,10 @@
+/*
+ * @Author: lich
+ * @Date: 2020-01-17 22:50:36
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2020-01-17 22:53:52
+ * 利用 postrender 渲染， 实现动画效果
+ */
 /**
  * @typedef {import("ol/Feature").default} feature
  */
@@ -5,9 +12,8 @@
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { getVectorContext } from 'ol/render';
-import { Point } from 'ol/geom';
 import { getTrackFeatures } from './track.feature';
-import { arcStyle, area, createPlanStyle } from './style';
+import { arcStyle, createPlanStyle } from './style';
 import loopFrame from './util.ol';
 
 /** 创建图层 */
@@ -41,32 +47,31 @@ trackLayer.on('postrender', evt => {
   const vectorContext = getVectorContext(evt);
   const { time } = evt.frameState;
 
-  /** 为向量添加样式 */
-  // vectorContext.drawGeometry(new Point(fromLonLat([120.12, 30.16])));
+  featureCollection.forEach(feature => {
+    let starTime = feature.get('startTime');
 
-  if (featureCollection.length > 0) {
-    featureCollection.forEach(feature => {
-      let starTime = feature.get('startTime');
+    if (typeof starTime !== 'number') {
+      feature.set('startTime', time);
+      starTime = time;
+    }
 
-      if (typeof starTime !== 'number') {
-        feature.set('startTime', time);
+    const current = loopFrame(starTime, time, getCoordinates(feature));
 
-        starTime = time;
-      }
+    if (current === false) return;
+    /** 设置线段样式 */
+    vectorContext.setStyle(arcStyle);
+    /** 绘制线段 */
+    vectorContext.drawGeometry(current.lineString);
 
-      const current = loopFrame(starTime, time, getCoordinates(feature));
+    /** 设置点样式 */
+    vectorContext.setStyle(createPlanStyle(current.rotation));
+    /** 绘制当前坐标的样式 */
+    vectorContext.drawGeometry(current.point);
 
-      if (current === false) return;
-      vectorContext.setStyle(arcStyle);
-
-      vectorContext.drawGeometry(current.gemo);
-      vectorContext.setStyle(createPlanStyle(current.rotation));
-      vectorContext.drawGeometry(new Point(current.lastCoordinates));
-      if (current.isReStart) {
-        feature.set('startTime', time);
-      }
-    });
-  }
+    if (current.isReStart) {
+      feature.set('startTime', time);
+    }
+  });
 
   window.map.render();
 });
