@@ -42,7 +42,7 @@ export const createPlanStyle = (rotation = 0) => {
     image: new Icon({
       img: createStyleIconImage(planSvg),
       imgSize: [30, 30],
-      rotation,
+      rotation: -1 * rotation + (Math.PI * 1) / 2,
       // color: '#FF0000',
       // crossOrigin: 'anonymous',
       // src: plane,

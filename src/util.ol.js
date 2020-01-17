@@ -12,7 +12,6 @@ function createGeometryPoint(currentCoordinates = []) {
 
 /** 根据经纬度获取旋转的弧度 */
 export function getRotation(start, end) {
-  console.log(start, end);
   const dx = end[0] - start[0];
   const dy = end[1] - start[1];
   const rotation = Math.atan2(dy, dx);
@@ -44,8 +43,8 @@ export default function loopFrame(startTime, endTime, longCoordinates) {
 
   if (currentLen >= 2) {
     rotation = getRotation(
-      longCoordinates[0],
-      longCoordinates[longCoordinates.length - 1],
+      currentCoordinates[currentCoordinates.length - 2],
+      currentCoordinates[currentCoordinates.length - 1],
     );
   }
 
@@ -53,7 +52,7 @@ export default function loopFrame(startTime, endTime, longCoordinates) {
     lastCoordinates,
     currentCoordinates,
     isReStart,
-    rotation: rotation + Math.PI / 2,
+    rotation,
     // gemo: createGeometryPoint(longCoordinates[currentLen - 1]),
     gemo: createGeometryLineString(currentCoordinates),
   };

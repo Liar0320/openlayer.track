@@ -7,7 +7,7 @@ import VectorSource from 'ol/source/Vector';
 import { getVectorContext } from 'ol/render';
 import { Point } from 'ol/geom';
 import { getTrackFeatures } from './track.feature';
-import { arcStyle, area } from './style';
+import { arcStyle, area, createPlanStyle } from './style';
 import loopFrame from './util.ol';
 
 /** 创建图层 */
@@ -60,7 +60,7 @@ trackLayer.on('postrender', evt => {
       vectorContext.setStyle(arcStyle);
 
       vectorContext.drawGeometry(current.gemo);
-      vectorContext.setStyle(area);
+      vectorContext.setStyle(createPlanStyle(current.rotation));
       vectorContext.drawGeometry(new Point(current.lastCoordinates));
       if (current.isReStart) {
         feature.set('startTime', time);
