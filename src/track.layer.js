@@ -6,9 +6,8 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { getVectorContext } from 'ol/render';
 import { Point } from 'ol/geom';
-import { fromLonLat } from 'ol/proj';
 import { getTrackFeatures } from './track.feature';
-import { arcStyle, docStyle, area } from './style';
+import { arcStyle, area } from './style';
 import loopFrame from './util.ol';
 
 /** 创建图层 */
@@ -43,7 +42,6 @@ trackLayer.on('postrender', evt => {
   const { time } = evt.frameState;
 
   /** 为向量添加样式 */
-  vectorContext.setStyle(arcStyle);
   // vectorContext.drawGeometry(new Point(fromLonLat([120.12, 30.16])));
 
   if (featureCollection.length > 0) {
@@ -59,7 +57,11 @@ trackLayer.on('postrender', evt => {
       const current = loopFrame(starTime, time, getCoordinates(feature));
 
       if (current === false) return;
+      vectorContext.setStyle(arcStyle);
+
       vectorContext.drawGeometry(current.gemo);
+      vectorContext.setStyle(area);
+      vectorContext.drawGeometry(new Point(current.lastCoordinates));
       if (current.isReStart) {
         feature.set('startTime', time);
       }

@@ -1,5 +1,7 @@
-import { Style, Stroke, Fill, RegularShape } from 'ol/style';
+import { Style, Stroke, Fill, RegularShape, Icon } from 'ol/style';
 import CircleStyle from 'ol/style/Circle';
+import { createStyleIconImage } from './util.ol';
+import { planSvg } from './asstes/svg';
 
 export const arcStyle = new Style({
   stroke: new Stroke({
@@ -34,6 +36,19 @@ export const area = new Style({
     }),
   }),
 });
+
+export const createPlanStyle = (rotation = 0) => {
+  return new Style({
+    image: new Icon({
+      img: createStyleIconImage(planSvg),
+      imgSize: [30, 30],
+      rotation,
+      // color: '#FF0000',
+      // crossOrigin: 'anonymous',
+      // src: plane,
+    }),
+  });
+};
 
 // const style = new Style({
 //   stroke: new Stroke({

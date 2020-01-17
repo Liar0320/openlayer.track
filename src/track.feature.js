@@ -2,7 +2,7 @@
 // @ts-ignore
 import { LineString } from 'ol/geom';
 import { Feature } from 'ol';
-import featuresSourceUrl from './svg/filter.topojson';
+import featuresSourceUrl from './asstes/filter.topojson';
 
 /**
  * 根据起始点，结束点 创建LineString 线段
@@ -22,7 +22,17 @@ function createFeature(coordinate) {
   const arcLine = arcGenerator.Arc(100, { offset: 0.5 });
 
   if (arcLine.geometries.length === 1) {
-    const line = new LineString(arcLine.geometries[0].coords);
+    /** @FIXME: 使用arcLine会产生跨坐标 */
+    const getcoords = arcLine.geometries[0].coords.map(coords => {
+      if (coords[0] < 0) coords[0] += 360;
+      if (coords[0] > 350) {
+        coords[0] -= 360;
+      }
+
+      return coords;
+    });
+
+    const line = new LineString(getcoords);
 
     line.transform('EPSG:4326', 'EPSG:3857');
 
