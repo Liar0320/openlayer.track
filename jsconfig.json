@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "checkJs": true,
+        "target": "es2018",
+        "module": "es6",
+        "baseUrl": "./",
+        "paths": {
+            "@/*":["./src/*"],
+            "ol": ["node_modules/ol/src"],
+            "ol/*": ["node_modules/ol/src/*"]
+        }
+    },
+    "include": [ 
+        "**/*.js",
+        "node_modules/ol/**/*.js"
+    ]
+}
