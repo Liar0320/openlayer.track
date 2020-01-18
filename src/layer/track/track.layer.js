@@ -1,8 +1,8 @@
 /*
  * @Author: lich
  * @Date: 2020-01-17 22:50:36
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2020-01-17 22:53:52
+ * @Last Modified by: lich
+ * @Last Modified time: 2020-01-18 22:57:01
  * 利用 postrender 渲染， 实现动画效果
  */
 /**
@@ -12,9 +12,9 @@
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { getVectorContext } from 'ol/render';
-import { getTrackFeatures } from './track.feature';
-import { arcStyle, createPlanStyle } from './style';
-import loopFrame from './util.ol';
+import { createTrackFeatures } from './track.feature';
+import { arcStyle, createPlanStyle } from '../../style';
+import loopFrame from '../../util.ol';
 
 /** 创建图层 */
 const trackLayer = new VectorLayer({
@@ -26,7 +26,7 @@ const trackLayer = new VectorLayer({
 let featureCollection = [];
 /** 往图层中添加 矢量元素 */
 
-getTrackFeatures().then((_featureCollection = []) => {
+createTrackFeatures().then((_featureCollection = []) => {
   featureCollection = _featureCollection;
   trackLayer.getSource().addFeatures(featureCollection);
 });

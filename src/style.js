@@ -1,8 +1,8 @@
 /*
  * @Author: lich
  * @Date: 2020-01-17 22:48:30
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2020-01-17 22:48:53
+ * @Last Modified by: lich
+ * @Last Modified time: 2020-01-18 23:25:05
  * 样式表
  */
 import { Style, Stroke, Fill, RegularShape, Icon } from 'ol/style';
@@ -49,6 +49,18 @@ export const createPlanStyle = (rotation = 0) => {
       img: createStyleIconImage(planSvg),
       imgSize: [30, 30],
       rotation: -1 * rotation + (Math.PI * 1) / 2,
+    }),
+  });
+};
+
+export const getAreaStyle = (radius = 5) => {
+  return new Style({
+    image: new CircleStyle({
+      stroke: new Stroke({
+        color: '#FF0000',
+        width: 2,
+      }),
+      radius,
     }),
   });
 };

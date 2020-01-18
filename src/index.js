@@ -4,7 +4,8 @@ import { View } from 'ol';
 import { fromLonLat } from 'ol/proj';
 import TileLayer from 'ol/layer/Tile';
 import { OSM } from 'ol/source';
-import { trackLayerInstance } from './track.layer';
+import { trackLayerInstance } from './layer/track/track.layer';
+import { areaLayerInstance } from './layer/area/layer';
 
 document.querySelector('#map').style.height = `${window.innerHeight}px`;
 
@@ -30,5 +31,6 @@ window.map = new Map({
       source: new OSM(),
     }),
     trackLayerInstance,
+    areaLayerInstance,
   ],
 });

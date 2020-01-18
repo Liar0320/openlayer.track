@@ -1,8 +1,8 @@
 /*
  * @Author: lich
  * @Date: 2020-01-17 22:54:34
- * @Last Modified by:   lich
- * @Last Modified time: 2020-01-17 22:54:34
+ * @Last Modified by: lich
+ * @Last Modified time: 2020-01-18 22:45:47
  * ol的工具库
  */
 import { LineString, Point } from 'ol/geom';
