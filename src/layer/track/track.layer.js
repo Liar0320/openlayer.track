@@ -2,7 +2,7 @@
  * @Author: lich
  * @Date: 2020-01-17 22:50:36
  * @Last Modified by: lich
- * @Last Modified time: 2020-01-18 22:57:01
+ * @Last Modified time: 2020-01-19 10:58:07
  * 利用 postrender 渲染， 实现动画效果
  */
 /**
@@ -18,7 +18,9 @@ import loopFrame from '../../util.ol';
 
 /** 创建图层 */
 const trackLayer = new VectorLayer({
-  source: new VectorSource(),
+  source: new VectorSource({
+    wrapX: false,
+  }),
   // style: arcStyle,
 });
 
@@ -72,7 +74,6 @@ trackLayer.on('postrender', evt => {
       feature.set('startTime', time);
     }
   });
-
   window.map.render();
 });
 

@@ -7,9 +7,10 @@ import { getAreaStyle } from '@/style';
 function createArea(coordinate) {
   const feature = new Feature({
     geometry: new Point(fromLonLat(coordinate)),
+    createTime: new Date().getTime(),
   });
 
-  feature.setStyle(getAreaStyle());
+  // feature.setStyle(getAreaStyle());
 
   return feature;
 }

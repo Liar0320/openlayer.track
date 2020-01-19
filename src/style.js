@@ -2,7 +2,7 @@
  * @Author: lich
  * @Date: 2020-01-17 22:48:30
  * @Last Modified by: lich
- * @Last Modified time: 2020-01-18 23:25:05
+ * @Last Modified time: 2020-01-19 11:32:40
  * 样式表
  */
 import { Style, Stroke, Fill, RegularShape, Icon } from 'ol/style';
@@ -53,14 +53,14 @@ export const createPlanStyle = (rotation = 0) => {
   });
 };
 
-export const getAreaStyle = (radius = 5) => {
+export const getAreaStyle = (ratio = 1) => {
   return new Style({
     image: new CircleStyle({
       stroke: new Stroke({
-        color: '#FF0000',
-        width: 2,
+        color: `rgba(0,0,0,${1 - ratio})`,
+        width: 1,
       }),
-      radius,
+      radius: 10 * ratio,
     }),
   });
 };

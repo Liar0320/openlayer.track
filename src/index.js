@@ -18,6 +18,7 @@ window.map = new Map({
   view: new View({
     center: fromLonLat(collectionLonLat.hangzhou),
     zoom: 1,
+    multiWorld: false,
     /** 限制当前屏幕内的范围  view.calculateExtent() */
     extent: [
       -6665811.10870122,
@@ -28,7 +29,9 @@ window.map = new Map({
   }),
   layers: [
     new TileLayer({
-      source: new OSM(),
+      source: new OSM({
+        // wrapX: false,
+      }),
     }),
     trackLayerInstance,
     areaLayerInstance,
