@@ -1,9 +1,8 @@
-import 'ol/ol.css';
 import Map from 'ol/Map';
 import { View } from 'ol';
 import { fromLonLat } from 'ol/proj';
 import TileLayer from 'ol/layer/Tile';
-import { OSM } from 'ol/source';
+import { OSM, XYZ } from 'ol/source';
 import { trackLayerInstance } from './layer/track/track.layer';
 import { areaLayerInstance } from './layer/area/layer';
 
@@ -29,8 +28,11 @@ window.map = new Map({
   }),
   layers: [
     new TileLayer({
-      source: new OSM({
-        // wrapX: false,
+      // source: new OSM({
+      //   // wrapX: false,
+      // }),
+      source: new XYZ({
+        url: `https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png`,
       }),
     }),
     trackLayerInstance,

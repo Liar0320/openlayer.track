@@ -2,7 +2,7 @@
  * @Author: lich
  * @Date: 2020-01-17 22:48:30
  * @Last Modified by: lich
- * @Last Modified time: 2020-01-19 11:32:40
+ * @Last Modified time: 2020-04-09 10:16:44
  * 样式表
  */
 import { Style, Stroke, Fill, RegularShape, Icon } from 'ol/style';
@@ -20,7 +20,7 @@ export const arcStyle = new Style({
 export const docStyle = new Style({
   image: new CircleStyle({
     fill: new Fill({
-      color: [255, 255, 255, 0.7],
+      color: [255, 255, 0, 0.7],
     }),
     radius: 1,
   }),
@@ -57,7 +57,7 @@ export const getAreaStyle = (ratio = 1) => {
   return new Style({
     image: new CircleStyle({
       stroke: new Stroke({
-        color: `rgba(0,0,0,${1 - ratio})`,
+        color: `rgba(255,255,0,${1 - ratio})`,
         width: 1,
       }),
       radius: 10 * ratio,

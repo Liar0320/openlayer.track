@@ -2,7 +2,7 @@
  * @Author: lich
  * @Date: 2019-10-24 17:56:09
  * @Last Modified by: lich
- * @Last Modified time: 2020-01-17 14:24:30
+ * @Last Modified time: 2020-04-09 10:19:33
  * @TODO:采用cdn加速
  */
 // / <reference types="./nodejs.d.ts" />
@@ -18,7 +18,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     // publicPath: '/dist/',
-    filename: 'bundle.js',
+    filename: 'Analysis.js',
     chunkFilename: '[name].js',
   },
   module: {
@@ -77,7 +77,7 @@ module.exports = {
     // minimize:false
   },
   target: 'web',
-  devtool: 'source-map',
+  // devtool: 'source-map',
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     // inline: true,
@@ -87,4 +87,27 @@ module.exports = {
     open: true,
   },
   plugins: [new HtmlWebpackPlugin({ template: './public/index.html' })],
+  externals: [
+    // 引入包的默认 entry
+    {
+      arc: 'arc',
+    },
+    // 引入包里的特定部分
+    // eslint-disable-next-line
+    // eslint-disable-next-line consistent-return
+    function(context, request, callback) {
+      // 所有 ol 包里的内容
+      if (/^ol\/?/.test(request)) {
+        // console.log(request);
+        // https://segmentfault.com/q/1010000021965610?_ea=33440450
+        // https://blog.meathill.com/fe-tool-chain/webpack-4-notes.html
+        /** 先关闭webgl */
+        // if (request === 'ol/layer/WebGLPoints') return callback();
+
+        return callback(null, request.replace(/\//g, '.'));
+      }
+      // @ts-ignore
+      callback();
+    },
+  ],
 };

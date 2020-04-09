@@ -1,6 +1,6 @@
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import { easeOut, linear } from 'ol/easing';
+import { linear } from 'ol/easing';
 import { createAreaFeature } from './feature';
 import { getAreaStyle } from '@/style';
 

@@ -2,7 +2,6 @@ import { Feature } from 'ol';
 import { Point } from 'ol/geom';
 import { fromLonLat } from 'ol/proj';
 import { getTrackFeatures } from '@/api/index';
-import { getAreaStyle } from '@/style';
 
 function createArea(coordinate) {
   const feature = new Feature({
